@@ -19,7 +19,7 @@ import java.util.Set;
 @Service
 public class UserServiceImpl implements com.INovus.service.UserService {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     public long createFromForm(SingUpForm singUpForm) {
         if (userRepository.existsByName(singUpForm.getUsername())) {
@@ -58,5 +58,13 @@ public class UserServiceImpl implements com.INovus.service.UserService {
         } else {
             return user;
         }
+    }
+
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 }

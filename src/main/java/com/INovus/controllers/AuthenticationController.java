@@ -33,11 +33,11 @@ import java.util.Locale;
 @Controller
 public class AuthenticationController implements AuthenticationSuccessHandler {
     @Autowired
-    public UserService userService;
+    private UserService userService;
     @Autowired
-    public UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
     @Autowired
-    ApplicationContext context;
+    private ApplicationContext context;
 
     @RequestMapping(value = "/sing-in", method = RequestMethod.GET)
     public ModelAndView showSingInForm(@RequestParam(value = "error", required = false) String error,
@@ -98,5 +98,29 @@ public class AuthenticationController implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         httpServletResponse.addCookie(new Cookie("username", authentication.getName()));
         httpServletResponse.sendRedirect("welcome");
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public UserDetailsService getUserDetailsService() {
+        return userDetailsService;
+    }
+
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
+    public ApplicationContext getContext() {
+        return context;
+    }
+
+    public void setContext(ApplicationContext context) {
+        this.context = context;
     }
 }

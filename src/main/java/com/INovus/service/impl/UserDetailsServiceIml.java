@@ -23,7 +23,7 @@ import java.util.Set;
 @Service
 public class UserDetailsServiceIml implements UserDetailsService {
     @Autowired
-    public UserService userService;
+    private UserService userService;
 
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         com.INovus.enteties.User user = userService.findByUserName(s);
@@ -49,5 +49,13 @@ public class UserDetailsServiceIml implements UserDetailsService {
         List<GrantedAuthority> authoritiesList = new ArrayList<GrantedAuthority>(authoritiesSet);
 
         return authoritiesList;
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }
